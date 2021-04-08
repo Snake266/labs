@@ -47,9 +47,9 @@ $s = 0$, $e = 1023 + 141 + 10 = 1174$, $f = 100101001100011001\underbrace{0\ldot
     0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
     \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
     0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
-    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
+    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n
   \end{pmatrix}
-  \} 2n
+  \} \text{2n строк}
 \]
 
 \paragraph{Решение} ~\\
@@ -67,7 +67,7 @@ $s = 0$, $e = 1023 + 141 + 10 = 1174$, $f = 100101001100011001\underbrace{0\ldot
 \begin{lstlisting}
   A = [0, A]
 \end{lstlisting}
-\[A = (0, 1, 1, 2, 2, \ldots, n\]
+\[A = 0, 1, 1, 2, 2, \ldots, n\]
 
 \begin{lstlisting}
   A = repmat(A, 2*n, 1);
@@ -78,6 +78,51 @@ $s = 0$, $e = 1023 + 141 + 10 = 1174$, $f = 100101001100011001\underbrace{0\ldot
     0 & 1 & 1 & 2 & 2 & 3 & 3 & \cdots n \\
     0 & 1 & 1 & 2 & 2 & 3 & 3 & \cdots n \\
     \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
-    0 & 1 & 1 & 2 & 2 & 3 & 3 & \cdots n \\
+    0 & 1 & 1 & 2 & 2 & 3 & 3 & \cdots n
+  \end{pmatrix}
+  \} \text{2n строк}
+\]
+
+\begin{lstlisting}
+  X = [0, 1]
+  X = repmat(X, 2*n, 1)
+\end{lstlisting}
+\[
+  X =
+  \begin{pmatrix}
+    0 & 1 \\
+    \vdots & \vdots \\
+    0 & 1
+  \end {pmatrix}
+  \} 2n
+\]
+
+\begin{lstlisting}
+  X = repmat(X, 1, n)
+\end{lstlisting}
+\[
+  X =\underbrace{
+  \begin{pmatrix}
+    0 & 1 & 0 & 1 & \cdots & 1 \\
+    0 & 1 & 0 & 1 & \cdots & 1 \\
+    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 1 & 0 & 1 & \cdots & 1
+  \end{pmatrix}
+}_{\text{n столбцов}} \}\text{2n строк}
+\]
+
+\begin{lstlisting}
+  A = A.*X
+\end{lstlisting}
+\[
+  A =
+  \begin{pmatrix}
+    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
+    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n \\
+    0 & 1 & 0 & 2 & 0 & 3 & 0 & \cdots & n
   \end{pmatrix}
 \]
+
+\section{Третье задание}
