@@ -4,6 +4,9 @@
 \usepackage{fontspec}
 \setmainfont{Liberation Sans}
 
+%фокусы с языками
+\usepackage[english,russian]{babel}
+
 % позиционирование и поднятие загаловка
 \usepackage{titling}
 \setlength{\droptitle}{-10em}
@@ -27,11 +30,16 @@
 \definecolor{backcolor}{rgb}{1, 0.8, 0.7}
 
 
-\lstset {
-  backgroundcolor = \color{backcolor},
-  frame = single
+\lstset{
+  backgroundcolor=\color{backcolor},
+  frame=single,
+  language=Octave,
+  breakatwhitespace=false,
+  breaklines=true
 }
 
+\usepackage{graphicx}
+\usepackage{float}
 
 % писанина связанная с текстом
 \renewcommand*\contentsname{Оглавление}
