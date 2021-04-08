@@ -1,0 +1,44 @@
+\documentclass[12pt, a4paper,oneside]{article}
+
+%шрифты
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+
+% позиционирование и поднятие загаловка
+\usepackage{titling}
+\setlength{\droptitle}{-10em}
+
+% немного математики
+\usepackage{amsmath}
+
+% геометрия
+\usepackage{geometry}
+\geometry {
+  a4paper,
+  left=20mm,
+  right=20mm
+}
+
+% Для кода
+\usepackage{listings}
+% цвета
+\usepackage{color}
+
+\definecolor{backcolor}{rgb}{1, 0.8, 0.7}
+
+
+\lstset {
+  backgroundcolor = \color{backcolor},
+  frame = single
+}
+
+
+% писанина связанная с текстом
+\renewcommand*\contentsname{Оглавление}
+
+\title{Лабораторная работа}
+
+\author{Батурин Георгий}
+\date{}
+
+\begin{document}
