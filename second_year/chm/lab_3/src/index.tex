@@ -119,3 +119,41 @@ err_e
 \begin{lstlisting}[backgroundcolor=\color{cyan}]
   ans = -2.4493e-16
 \end{lstlisting}
+
+\section{(4) Шестое задание}
+Задайте функцию Рунге $f(x) = \frac{1}{1+25x^{2}}$ на отрезке $\left[-5, 5\right]$ в десяти равноотстоящих точках. Сравните значения функции и интерполяционного полинома при $x=4,5$. Постройте графики функции и полинома назаданном отрезке и объясните поведение интерполяционного полинома.Посмотрите, что будет происходить при постепенном увеличении числа узлов интерполяции и подумайте, как можно избавиться от получившегося эффекта.\\[2mm]
+
+\begin{lstlisting}
+  f = @(x) 1./(1+25.*x.^2);
+
+  a = 10;
+  t1 = linspace(-5, 5, a);
+
+  n = length(t1);
+  syms x
+  for i = 1 : n
+    P = 1;
+    for j = 1 : n
+      if (i ~= j)
+        P = P * (x-t1(j))/(t1(i)-t1(j));
+      end
+    end
+    Li(i) = f(t1(i)) * P;
+  end
+  pol = @(x_) eval(subs(sum(Li), x_));
+
+  hold on, grid on
+  x = -5 : 0.01 : 5;
+  plot(x, f(x), 'k', x, pol(x), 'r')
+  delta = abs(f(4.5) - pol(4.5))
+\end{lstlisting}
+\begin{lstlisting}[backgroundcolor=\color{cyan}]
+  delta = 0.072465
+\end{lstlisting}
+
+\begin{figure}[h]
+  \caption{Функция Рунге и интерполяционный полином}
+  \label{fig:plot_6}
+  \centering
+  \includegraphics[width=0.8\textwidth]{images/task_6_1.png}
+\end{figure}
