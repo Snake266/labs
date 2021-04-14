@@ -1,0 +1,54 @@
+\documentclass[12pt, a4paper,oneside]{article}
+
+%шрифты
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+
+%фокусы с языками
+\usepackage[english,russian]{babel}
+
+% позиционирование и поднятие загаловка
+\usepackage{titling}
+
+% немного математики
+\usepackage{amsmath}
+
+% геометрия
+\usepackage{geometry}
+\geometry {
+  a4paper,
+  top = 15mm,
+  left=25mm,
+  right=15mm,
+  bottom = 25mm
+}
+
+% Для кода
+\usepackage{listings}
+% цвета
+\usepackage{color}
+
+\definecolor{backcolor}{rgb}{1, 0.8, 0.7}
+
+
+\lstset{
+  backgroundcolor=\color{backcolor},
+  frame=single,
+  language=Octave,
+  breakatwhitespace=false,
+  breaklines=true,
+  numbers=left
+}
+
+\usepackage{graphicx}
+\usepackage{float}
+
+% писанина связанная с текстом
+\renewcommand*\contentsname{Оглавление}
+
+\title{Лабораторная работа}
+
+\author{Батурин Георгий}
+\date{}
+
+\begin{document}
