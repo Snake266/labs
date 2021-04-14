@@ -15,6 +15,6 @@ fi(3, t2(4)), f(t2(4))
 
 hold on, grid on
 x = 0:0.001:1;
-plot(x,f(x),'b')
-plot(t1,f(t1),'g')
-plot(t2,y,'r*')
+plot(x,f(x),'k')
+plot(t1,f(t1),'r')
+plot(t2,y,'b*')
