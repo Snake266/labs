@@ -1,12 +1,14 @@
 \documentclass[12pt, a4paper,oneside]{article}
-
 %шрифты
 \usepackage{fontspec}
 \setmainfont{Liberation Sans}
 
+% Язык
+\usepackage[russian]{babel}
+
 % позиционирование и поднятие загаловка
 \usepackage{titling}
-\setlength{\droptitle}{-10em}
+%\setlength{\droptitle}{-10em}
 
 % немного математики
 \usepackage{amsmath}
@@ -15,8 +17,10 @@
 \usepackage{geometry}
 \geometry {
   a4paper,
-  left=20mm,
-  right=20mm
+  top = 15mm,
+  left=25mm,
+  right=15mm,
+  bottom = 25mm
 }
 
 % Для кода
@@ -26,13 +30,19 @@
 
 \definecolor{backcolor}{rgb}{1, 0.8, 0.7}
 
+%\usepackage[utf8x]{inputenc}
 
 \lstset {
   backgroundcolor = \color{backcolor},
-  frame = single
+  frame = single,
+  inputencoding=utf8,
+  extendedchars=\true,
+  keepspaces=true,
+  escapechar={|}
 }
 
-
+\usepackage{graphicx}
+\usepackage{float}
 % писанина связанная с текстом
 \renewcommand*\contentsname{Оглавление}
 
