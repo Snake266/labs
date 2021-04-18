@@ -19,7 +19,8 @@
     "geometry"
     "listings"
     "color"
-    "graphicx")
+    "graphicx"
+    "float")
    (LaTeX-add-color-definecolors
     "backcolor"))
  :latex)

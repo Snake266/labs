@@ -3,6 +3,8 @@
  (lambda ()
    (LaTeX-add-labels
     "fig:plot_5"
-    "fig:plot_6"))
+    "fig:plot_6"
+    "fig:plot_7_1"
+    "fig:plot_7_2"))
  :latex)
 

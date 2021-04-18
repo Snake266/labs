@@ -30,14 +30,19 @@
 
 \definecolor{backcolor}{rgb}{1, 0.8, 0.7}
 
+%\usepackage[utf8x]{inputenc}
 
 \lstset {
   backgroundcolor = \color{backcolor},
-  frame = single
+  frame = single,
+  inputencoding=utf8,
+  extendedchars=\true,
+  keepspaces=true,
+  escapechar={|}
 }
 
 \usepackage{graphicx}
-
+\usepackage{float}
 % писанина связанная с текстом
 \renewcommand*\contentsname{Оглавление}
 

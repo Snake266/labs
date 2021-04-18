@@ -1,5 +1,5 @@
-n = 2;
-k = [0 : n];
+n = 3;
+k = [1 : n];
 xk = pi * cosd(pi * (2*k-1)/(2*n))
 hold on, grid on
 xlim([xk(1) - 0.01, xk(3) + 0.01])
