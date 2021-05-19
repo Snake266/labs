@@ -1,11 +1,20 @@
-df1 = @(x, h) (sin(x+h) - sin(x))/h;
-df2 = @(x, h) (sin(x+h) - sin(x-h))/(2*h);
+f = @(x) sin(x);
+x0 = 1/2;
+syms x;
 
-x = 0;
-for h = [1/2, 1/4, 1/8]
-   printf("Значение производной по первой формуле, для h = %f: %f\n", h, df1(x, h))
+first_error = [];
+second_error = [];
+
+h = 1/2;
+v = double(subs(taylor(f,x,x0), x0+h) - subs(taylor(f,x,x0), x0-h))
+
+for h = [1/2, 1/4, 1/8, 1/16]
+  df1 = (f(x0 + h) - f(x0))/h;
+  df2 = (f(x0 + h) - f(x0 - h))/(2*h);
+
+  first_error = [first_error, abs(df1 - v)];
+  second_error = [second_error, abs(df2 - v)];
 end
-printf("\n")
-for h = [1/2, 1/4, 1/8]
-    printf("Значение производной по второй формуле, для h = %f: %f\n", h, df2(x, h))
-end
+
+df1, df2
+first_error, second_error
