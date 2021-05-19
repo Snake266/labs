@@ -2,6 +2,7 @@
  "index"
  (lambda ()
    (LaTeX-add-labels
-    "fig:plot_1"))
+    "fig:plot_2"
+    "fig:plot_3"))
  :latex)
 

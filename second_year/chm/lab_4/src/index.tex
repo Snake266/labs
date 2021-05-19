@@ -69,10 +69,30 @@ first_error, second_error
 \end{lstlisting}
 \begin{figure}[H]
   \caption{}
-  \label{fig:plot_1}
+  \label{fig:plot_2}
   \centering
   \includegraphics[width=0.9\textwidth]{images/image_2.png}
 \end{figure}
 
 \section{(3) Третье задание}
 Неустойчивость численного дифференцирования. Выберите некоторую функцию (например, $\sin x$, $\cos x$, $\exp x$, $\sh x$, $\ch x$, $\ln x$, \ldots) и некоторую точку x из области определения функции. Попробуйте применить формулу $y^{'}(x) \approx \frac{y(y+h) - y(x)}{h}$ для стремящейся к нулю последовательности $h = \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}, \ldots$. Будет ли погрешность $\epsilon = \left |y^{'}(x) - \frac{y(x+h) - y(x)}{h} \right |$ монотонно убывать при уменьшении h? Сравните практический и теоритеческий результаты.\\[5mm]
+
+\begin{lstlisting}
+  f = @(x) sin(x)
+  x0 = 1/2;
+  df = @(x) cos(x)
+
+  n = 100;
+  h = 1./[2 : n];
+  dff = (f(x0 + h) - f(x0))./h
+  eps = abs(df(x0) - dff)
+  hold on, grid on
+  plot([2:n], eps)
+\end{lstlisting}
+
+\begin{figure}[H]
+  \caption{}
+  \label{fig:plot_3}
+  \centering
+  \includegraphics[width=0.9\textwidth]{images/image_3.png}
+\end{figure}
