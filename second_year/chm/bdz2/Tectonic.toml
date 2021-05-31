@@ -3,5 +3,5 @@ name = 'bdz2'
 bundle = 'https://ttassets.z13.web.core.windows.net/tlextras-2020.0r0.tar'
 
 [[output]]
-name = 'default'
+name = 'Baturin_BDZ'
 type = 'pdf'

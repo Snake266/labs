@@ -1,3 +1,31 @@
 \maketitle
 \tableofcontents
 \newpage
+
+\section{Девятое задание}
+\paragraph{Текст задания} ~\\
+Даны формула численного дифференцирования и таблично заданная функция $y(x)$ (данные в таблице могут содержать погрешность не более $\delta$). Определить оптимальное значение шага $h_{\text{опт}}$, когда достигается максимально возможная точность данной формулы, а неустойчивость численного дифференцирования еще себя не проявляет.\\[2mm]
+\[
+  \text{ф-ла } y_{0}^{''} = \frac{1}{h^{2}} (y_{0} - 2y_{1} + y_{2}); \text{функ. } y(x) = cos x \text{ на отрезке } \left[ \frac{\pi}{4}, 4 \right]; \text{ погр. } \delta = 10^{-8}
+\]
+
+\paragraph{Решение} ~\\
+Из-за округления чисел в мантиссе любые вычисления на компьютере ограничены машинной точностью $\delta$.
+В действительности компьютер вычислит:
+\begin{align*}
+  y_{0}^{''} & = \frac{1}{h^2} (\widetilde{y_{0}} - 2 \widetilde{y_{1}} + \widetilde{y_{2}})\\
+  & \text{, где } \widetilde y_{0} = y_{0} + \delta_{0}; \widetilde y_{1} = y_{1} + \delta_{1}; \widetilde y_{2} = y_{2} + \delta_{2}
+\end{align*}
+Рассмотри погрешность:
+\begin{equation*}
+  \begin{split}
+    \Delta & = \left| y_{0}^{''} - \frac{y_{0} + \delta_{0} - 2 y_{1} - 2\delta_{1} + y_{2} + \delta_{2}}{h^{2}} \right| = \\[2mm]
+    & = \left| \left( y_{0}^{''} - \frac{y_{0} - 2y_{1} + y_{2}}{h^{2}} \right) + \left( \frac{\delta_{0}}{h^{2}} - \frac{2\delta_{1}}{h^{2}} + \frac{\delta_{2}}{h^{2}} \right)\right| \leq \\[2mm]
+    & \leq \left| \left( y_{0}^{''} - \frac{y_{0} - 2y_{1} + y_{2}}{h^{2}}  \right) + \left|\frac{\delta_{0}}{h^{2}}\right| + \left|\frac{2\delta_{1}}{h^{2}}\right| + \left|\frac{\delta_{2}}{h^{2}}\right|  \right| \leq \\[2mm]
+    & \leq \left| \left( y_{0}^{''} - \frac{y_{0} - 2y_{1} + y_{2}}{h^{2}}  \right)  \right| + \left| \frac{4\delta}{h^{2}} \right|
+  \end{split}
+\end{equation*}
+Для оценки разности $\left| \left(y_{0}^{''} - \frac{y_{0} - 2y_{1} + y_{2}}{h^{2}} \right) \right|$ разложим $y_{1}$ и $y_{2}$ в ряд Тейлорав окрестности $x_{0}$ до $h^{3}$
+\[
+  y_{1}
+\]
