@@ -17,6 +17,7 @@
     "titling"
     "amsmath"
     "geometry"
+    "hyperref"
     "listings"
     "color"
     "graphicx"
