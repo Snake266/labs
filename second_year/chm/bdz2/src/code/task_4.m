@@ -1,1 +1,1 @@
-A = [-9, -2, 5; 2, -5, 9; 6, -7, -10]; % МатрицаA_1 = sum(abs(A))B = A'*Alambdas = eig(B) % Находим собственные значенияA_2 = sqrt(max(lambdas))
+A = [-9, -2, 5; 2, -5, 9; 6, -7, -10]; % МатрицаA_1 = max(sum(abs(A)))B = A'*Alambdas = eig(B) % Находим собственные значенияA_2 = sqrt(max(lambdas))

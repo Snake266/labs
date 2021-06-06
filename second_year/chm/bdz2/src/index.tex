@@ -135,10 +135,71 @@
 \begin{lstlisting}
   A = [-9, -2, 5; 2, -5, 9; 6, -7, -10]; % Матрица
 
-  A_1 = sum(abs(A))
+  A_1 = max(sum(abs(A)))
 
   B = A'*A
   lambdas = eig(B) % Находим собственные значения
 
   A_2 = sqrt(max(lambdas))
 \end{lstlisting}
+\begin{lstlisting}[backgroundcolor=\color{cyan}]
+  A_1 = 24
+  B =
+    121   -34   -87
+    -34    78    15
+    -87    15   206
+
+  lambdas =
+    48.929
+    90.646
+    265.425
+
+  A_2 = 16.292
+\end{lstlisting}
+Получаем, что $||\textbf{x}||_{1} = 25; ||\textbf{x}||_{2} = 16.292$
+
+\section{Тринадцатое задание}
+\paragraph{Текст задания} ~\\
+Правая часть СЛАУ $A_{\textbf{x}} = f$ содержит погрешность, норма которой равна $||\delta f||_{\infty}$. Оценить относительную погрешность нормы решения $\frac{||\delta \textbf{x}||_{\infty}}{||\textbf{x}||_{\infty}}$. Указание: воспользоваться оценкой $\frac{|| \delta \textbf{x}||_{\infty}}{||\textbf{x}||_{\infty}} \leq \mu(A) \frac{||\delta \textbf{f}||_{\infty}}{||\textbf{f}||_{\infty}}$.
+
+\[
+  A =
+  \begin{pmatrix}
+    -9 & 5 & 7\\
+    -2 & -8& -6\\
+    -5 & 2 & 9
+  \end{pmatrix}
+  , f =
+  \begin{pmatrix}
+    -5.3\\
+    7.2\\
+    -3.4\\
+  \end{pmatrix}
+  , ||\delta \textbf{f}||_{\infty} = 0.6
+\]
+
+\paragraph{Решение} ~\\
+\begin{lstlisting}
+  A = [-9, 5, 7; -2, -8, -6; -5, 2, 9];
+  f = [-5.3; 7.2; -3.4];
+  delta_f = 0.6;
+
+  A_inf = max(sum(abs(A), 2))
+
+  A_inv_inf = max(sum(abs(inv(A)), 2))
+
+  muA = A_inf * A_inv_inf
+
+
+  f_inf = max(f)
+
+  answer = muA * delta_f/f_inf
+\end{lstlisting}
+\begin{lstlisting}[backgroundcolor=\color{cyan}]
+  A_inf = 21
+  A_inv_inf = 0.3432
+  muA = 7.2076
+  f_inf = 7.2000
+  answer = 0.6006
+\end{lstlisting}
+Получаем, что $\frac{||\delta \textbf{x}||_{\infty}}{||\textbf{x}||_{\infty}} \approx 0.6006$
