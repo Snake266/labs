@@ -70,15 +70,15 @@
   h = 2/4;
   a = 1; b = 3;
   x = a : h : b
-  S = h * sum(f(x))
+  S = h * sum(f(x)(1:end-1))
+
 \end{lstlisting}
 \begin{lstlisting}[backgroundcolor=\color{cyan}]
   x_i:
   x =
+    1.0000    1.5000    2.0000    2.5000    3.0000
 
-  1.0000    1.5000    2.0000    2.5000    3.0000
-
-  S = 5.7227
+  S = 5.0158
 \end{lstlisting}
 Для $h_{2} = \frac{2}{12}$:
 \begin{lstlisting}
@@ -87,14 +87,14 @@
   h = 2/12;
   a = 1; b = 3;
   x = a : h : b
-  S = h * sum(f(x))
+  S = h * sum(f(x)(1:end-1))
 \end{lstlisting}
 \begin{lstlisting}[backgroundcolor=\color{cyan}]
   x_i:
   x =
   1.0000    1.1667    1.3333    1.5000    1.6667    1.8333    2.0000    2.1667    2.3333    2.5000    2.6667    2.8333    3.0000
 
-  S = 5.5135
+  S = 5.2779
 \end{lstlisting}
 
 Найдем погрешность:
@@ -107,7 +107,7 @@
 \end{gather*}
 
 \begin{align*}
-  \epsilon = I - S\left(\frac{2}{12}\right) = c \cdot h_{2}^{2} = \left| \frac{9 \left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{2 \cdot 36} \right| = \left| \frac{\left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{8} \right| = \left|\frac{5.5135 - 5.7227}{8} \right| \approx 0.026
+  \epsilon = I - S\left(\frac{2}{12}\right) = c \cdot h_{2}^{2} = \left| \frac{9 \left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{2 \cdot 36} \right| = \left| \frac{\left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{8} \right| = \left|\frac{5.2779 - 5.0158}{8} \right| \approx 0.033
 \end{align*}
 
 \section{Одиннадцатое задание}
