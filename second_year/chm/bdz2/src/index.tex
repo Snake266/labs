@@ -109,3 +109,36 @@
 \begin{align*}
   \epsilon = I - S\left(\frac{2}{12}\right) = c \cdot h_{2}^{2} = \left| \frac{9 \left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{2 \cdot 36} \right| = \left| \frac{\left(S\left(\frac{2}{12}\right) - S\left(\frac{2}{4}\right)\right)}{8} \right| = \left|\frac{5.5135 - 5.7227}{8} \right| \approx 0.026
 \end{align*}
+
+\section{Одиннадцатое задание}
+\paragraph{Текст задание} ~\\
+Предложить способ вычисления несобственного интеграла на компьютере. Указание: использовать один изметодов, рассмотренных на лекции или семинаре.
+\[
+  \int_{0}^{1}\frac{\sqrt{x} \sin x}{(x - 1)^{2}} dx
+\]
+
+\section{Двенадцатое задание}
+\paragraph{Текст задания} ~\\
+Для заданной матрицы вычислить подчинённую норму матрицы для следующих векторных норм: $ ||\textbf{x}||_{1} = \sum_{i}|x_{i}|, ||\textbf{x}||_{2} = \sqrt{\sum_{i} x_{i}^{2}}$.\\
+\[
+  \begin{pmatrix}
+    9 & -2 & 5\\
+    2 & -5 & 9\\
+    6 & -7 & -10
+  \end{pmatrix}
+\]
+
+\paragraph{Решение} ~\\
+\[
+  ||\textbf{x}||_{1} = \max \sum_{i} |x_{i}|, ||\textbf{x}||_{2} = \sqrt{\max \sum_{i} \lambda_{i} (A^{T}A)}
+\]
+\begin{lstlisting}
+  A = [-9, -2, 5; 2, -5, 9; 6, -7, -10]; % Матрица
+
+  A_1 = sum(abs(A))
+
+  B = A'*A
+  lambdas = eig(B) % Находим собственные значения
+
+  A_2 = sqrt(max(lambdas))
+\end{lstlisting}
