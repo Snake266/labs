@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 // Обьявление нужных операций
 `define ADD   5'b00000 // сложение
 `define SUB   5'b01000 // вычитание
@@ -24,55 +26,55 @@ module ALU(
            output reg Flag);
    always @(*) begin
       case(F)
-        ADD: begin
+        `ADD: begin
            Y <= A + B;
            Flag <= 0;
         end
-        SUB: begin
+        `SUB: begin
            Y <= A - B;
            Flag <= 0;
         end
-        SLL: begin
+        `SLL: begin
            Y <= A << B;
            Flag <= 0;
         end
-        LT: begin
+        `LT: begin
            Y <= $signed(A) < $signed(B);
            Flag <= 0;
         end
-        UTL: begin
+        `ULT: begin
            Y <= (A < B);
            Flag <= 0;
         end
-        XOR: begin
+        `XOR: begin
            Y <= A ^ B;
            Flag <= 0;
         end
-        SRL: begin
+        `SRL: begin
            Y <= A >> B;
            Flag <= 0;
         end
-        USRL: begin
+        `USRL: begin
            Y <= $signed(A) >>> $signed (B);
            Flag <= 0;
         end
-        OR: begin
+        `OR: begin
            Y <= A | B;
            Flag <= 0;
         end
-        AND: begin
+        `AND: begin
            Y <= A & B;
            Flag <= 0;
         end
-        FEQ: begin
+        `FEQ: begin
            Y <= A == B;
            Flag <= A == B;
         end
-        FNEQ: begin
+        `FNEQ: begin
            Y <= A != B;
            Flag <= A != B;
         end
-        FLT: begin
+        `FLT: begin
            Y <= ($signed(A) < $signed(B));
            Flag <= ($signed(A) < $signed(B));
         end
