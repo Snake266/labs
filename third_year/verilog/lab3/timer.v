@@ -1,11 +1,16 @@
 module timer(
-             input        reset,
-             input        device_running,
+             input            reset,
+             input            btn_prs,
              output reg [3:0] hundredths_counter,
-             output [3:0] tenths_counter,
-             output [3:0] seconds_counter,
-             output [3:0] ten_seconds_counter
+             output reg [3:0] tenths_counter,
+             output reg [3:0] seconds_counter,
+             output reg [3:0] ten_seconds_counter
              );
+   reg                        device_running;
+   always @(posedge clk) begin
+      if(btn_prs) device_running <= ~device_running;
+   end
+
    reg [16:0]             pulse_counter = 17'd0;
    wire                   hundredths_of_second_passed = (pulse_counter == 17'd259999);
    always @(posedge clk or posedge reset) begin
