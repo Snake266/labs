@@ -22,6 +22,7 @@ module fsm(
         TRANSMIT: begin
            state <= IDLE;
         end
+        default: state <= IDLE;
       endcase // case (state)
    end
 endmodule // fsm
