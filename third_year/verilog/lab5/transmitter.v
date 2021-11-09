@@ -5,7 +5,8 @@ module transmitter(
                    output    busy,
                    output    tx
                    );
-   always @ (  ) begin
+
+   always @ (posedge clk or posedge clk) begin
 
    end
 
