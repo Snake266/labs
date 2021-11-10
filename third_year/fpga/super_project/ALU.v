@@ -31,7 +31,7 @@ module ALU(
            Flag <= 0;
         end
         `SUB: begin
-           Y <= A - B;
+           Y <= A + ~B + 1;
            Flag <= 0;
         end
         `SLL: begin
@@ -78,7 +78,18 @@ module ALU(
            Y <= ($signed(A) < $signed(B));
            Flag <= ($signed(A) < $signed(B));
         end
-
+        `FGTE: begin
+           Y <= ($signed(A) >= $signed(B));
+           Flag <= ($signed(A) >= $signed(B));
+        end
+        `FULT: begin
+           Y <= (A < B);
+           Flag <= (A < B);
+        end
+        `FUGTE: begin
+           Y <= (A >= B);
+           Flag <= (A >= B);
+        end
       endcase // case (sel)
    end
 endmodule // ALU
