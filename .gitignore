@@ -2,3 +2,6 @@ test/
 *.docs
 *.out
 paid/
+*.zip
+*.vcd
+*.vvp

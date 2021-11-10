@@ -13,11 +13,14 @@ module fifo
    reg [FIFO_DEPTH-1 : 0]        write_ptr;
    reg [FIFO_DEPTH-1 : 0]        read_ptr;
    reg [DATA_WIDTH-1 : 0]        mem [0 : FIFO_DEPTH-1];
-   assign empty = (counter == 0);
-   assign full = (counter == FIFO_DEPTH-1);
+   assign empty = (write_ptr == read_ptr) ? 1 : 0;
+   assign full = (write_ptr == FIFO_DEPTH-1);
 
    always @(posedge clk) begin
-      if (rst) counter <= 0;
+      if (rst) begin
+         write_ptr <= 0;
+         read_ptr <= 0;
+      end
       if(we) begin
          mem[write_ptr] <= data_in;
          write_ptr <= write_ptr + 1;
@@ -27,4 +30,5 @@ module fifo
          read_ptr <= read_ptr + 1;
       end
    end // always @ (posedge clk)
+
 endmodule // fifo

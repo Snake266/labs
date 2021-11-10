@@ -1,4 +1,4 @@
-import imports::states;
+`include "imports.v"
 
 module fsm(
            input clk,
@@ -8,21 +8,25 @@ module fsm(
            output start_tr
            );
    reg [1:0]      state;
-   always @ () begin
+   always @ (posedge clk) begin
       case (state)
-        IDLE: begin
-           if(empty_fifo | busy_tr) state <= IDLE;
-           else state <= LOAD;
+        `IDLE: begin
+           if(empty_fifo | busy_tr) state <= `IDLE;
+           else state <= `LOAD;
         end
 
-        LOAD: begin
-           state <= TRANSMIT;
+        `LOAD: begin
+           state <= `TRANSMIT;
         end
 
-        TRANSMIT: begin
-           state <= IDLE;
+        `TRANSMIT: begin
+           state <= `IDLE;
         end
-        default: state <= IDLE;
+        default: state <= `IDLE;
       endcase // case (state)
-   end
+   end // always
+
+   assign re_fifo = (state == `LOAD);
+   assign start_tr = (state == `TRANSMIT);
+
 endmodule // fsm
