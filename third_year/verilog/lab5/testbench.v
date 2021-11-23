@@ -22,38 +22,36 @@ module testbench;
           .we(write)
 );
 
-   always @(posedge clk) begin
-      if(full) $finish;
-   end
-
-
 initial begin
-  reset = 1;
-  #2
+   reset = 1;
+   #2 reset = 0;
+   data = 1;
+   write = 1;
 
-  reset = 0;
-  data = 3;
-  write = 1;
-  #2
+   #2 write = 0;
 
-  write = 0;
-  #2
+   #2 data = 2;
+   write = 1;
 
-  data = 4;
-  write = 1;
-  #2
+   #2 write = 0;
 
-  write = 0;
-  #2
+   #2 data = 3;
+   write = 1;
 
-  data = 5;
-  write = 1;
-  #2
+   #2 write = 0;
 
-  write = 0;
+   #2 data = 4;
+   write = 1;
+
+   #2 write = 0;
+
+   #2 data = 5;
+   write = 1;
+
+   #2 write = 0;
 
   #100
-  $stop;
+  $finish;
 end
 
 initial begin
