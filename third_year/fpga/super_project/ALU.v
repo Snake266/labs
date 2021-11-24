@@ -21,73 +21,73 @@
 module ALU(
            input [31:0]      A,
            input [31:0]      B,
-           input [4:0]       F,
-           output reg [31:0] Y,
+           input [4:0]       ALUOp,
+           output reg [31:0] Result,
            output reg Flag);
    always @(*) begin
-      case(F)
+      case(ALUOp)
         `ADD: begin
-           Y <= A + B;
+           Result <= A + B;
            Flag <= 0;
         end
         `SUB: begin
-           Y <= A + ~B + 1;
+           Result <= A + ~B + 1;
            Flag <= 0;
         end
         `SLL: begin
-           Y <= A << B;
+           Result <= A << B;
            Flag <= 0;
         end
         `LT: begin
-           Y <= $signed(A) < $signed(B);
+           Result <= $signed(A) < $signed(B);
            Flag <= 0;
         end
         `ULT: begin
-           Y <= (A < B);
+           Result <= (A < B);
            Flag <= 0;
         end
         `XOR: begin
-           Y <= A ^ B;
+           Result <= A ^ B;
            Flag <= 0;
         end
         `SRL: begin
-           Y <= A >> B;
+           Result <= A >> B;
            Flag <= 0;
         end
         `USRL: begin
-           Y <= $signed(A) >>> $signed (B);
+           Result <= $signed(A) >>> $signed (B);
            Flag <= 0;
         end
         `OR: begin
-           Y <= A | B;
+           Result <= A | B;
            Flag <= 0;
         end
         `AND: begin
-           Y <= A & B;
+           Result <= A & B;
            Flag <= 0;
         end
         `FEQ: begin
-           Y <= A == B;
+           Result <= A == B;
            Flag <= A == B;
         end
         `FNEQ: begin
-           Y <= A != B;
+           Result <= A != B;
            Flag <= A != B;
         end
         `FLT: begin
-           Y <= ($signed(A) < $signed(B));
+           Result <= ($signed(A) < $signed(B));
            Flag <= ($signed(A) < $signed(B));
         end
         `FGTE: begin
-           Y <= ($signed(A) >= $signed(B));
+           Result <= ($signed(A) >= $signed(B));
            Flag <= ($signed(A) >= $signed(B));
         end
         `FULT: begin
-           Y <= (A < B);
+           Result <= (A < B);
            Flag <= (A < B);
         end
         `FUGTE: begin
-           Y <= (A >= B);
+           Result <= (A >= B);
            Flag <= (A >= B);
         end
       endcase // case (sel)
