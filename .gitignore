@@ -1,6 +1,7 @@
 test/
 *.docs
 *.out
+*.bak*
 paid/
 *.zip
 *.vcd
