@@ -16,7 +16,7 @@ module riscv_decoder(
                      input [31:0]                   fetched_instr_i, // inst to decode that comes out of mem
                      output reg [1:0]               ex_op_a_sel_o, // Control signal of MUX to choose first op of ALU
                      output reg [2:0]               ex_op_b_sel_o, // Control signal of MUX to choose second op of ALU
-                     output reg [`ALU_OP_WIDth-1:0] alu_op_o, // ALU operation
+                     output reg [`ALU_OP_WIDTH-1:0] alu_op_o, // ALU operation
                      output reg                     mem_req_o, // Request of mem access
                      output reg                     mem_we_o, // Write enable
                      output reg [2:0]               mem_size_o, // Control signal that set size of WORD at write-read in mem
@@ -25,8 +25,9 @@ module riscv_decoder(
                      output reg                     illegal_instr_o, // Signal of incorrect instruction
                      output reg                     branch_o, // Signal of conditional jump
                      output reg                     jal_o, // Signal of unconditional jump "jal"
-                     output reg                     jarl_o,          // Signal of unconditional jump "jalr"
+                     output reg                     jalr_o          // Signal of unconditional jump "jalr"
                      );
+
    wire [6:0]                                       op_code = fetched_instr_i[6:0];
    wire [2:0]                                       funct3 = fetched_instr_i[14:12];
    wire [6:0]                                       funct7 = fetched_instr_i[31:25];
@@ -36,7 +37,7 @@ module riscv_decoder(
       case (op_code)
         `OP: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            mem_we_o <= 0;
@@ -78,7 +79,7 @@ module riscv_decoder(
                   end
 
                   3'h5: begin
-                     alu_op_o <= ALU_SRL;
+                     alu_op_o <= `ALU_SRL;
                      gpr_we_a_o <= 1;
                      illegal_instr_o <= 0;
                   end
@@ -115,13 +116,19 @@ module riscv_decoder(
                      illegal_instr_o <= 1;
                   end
                 endcase // case (funct3)
+             end // case: 7'h20
+
+             default: begin
+                alu_op_o <= 0;
+                gpr_we_a_o <= 0;
+                illegal_instr_o <= 1;
              end
            endcase // case (funct7)
         end // case: `OP
 
         `OP_IMM: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            mem_we_o <= 0;
@@ -216,7 +223,7 @@ module riscv_decoder(
 
         `LOAD: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            mem_we_o <= 0;
            ex_op_a_sel_o <= 0;
@@ -285,7 +292,7 @@ module riscv_decoder(
 
         `STORE: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 0;
@@ -331,7 +338,7 @@ module riscv_decoder(
 
         `BRANCH: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 0;
            mem_we_o <= 0;
@@ -385,7 +392,7 @@ module riscv_decoder(
 
         `JAL: begin
            jal_o <= 1;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 1;
@@ -408,7 +415,7 @@ module riscv_decoder(
            alu_op_o <= 0;
            case (funct3)
              3'h0: begin
-                jarl_o <= 1;
+                jalr_o <= 1;
                 ex_op_a_sel_o <= 1;
                 ex_op_b_sel_o <= 4;
                 gpr_we_a_o <= 1;
@@ -416,7 +423,7 @@ module riscv_decoder(
              end
 
              default: begin
-                jarl_o <= 0;
+                jalr_o <= 0;
                 ex_op_a_sel_o <= 0;
                 ex_op_b_sel_o <= 0;
                 gpr_we_a_o <= 0;
@@ -427,7 +434,7 @@ module riscv_decoder(
 
         `LUI: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 1;
@@ -442,7 +449,7 @@ module riscv_decoder(
 
         `AUIPC: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 1;
@@ -457,7 +464,7 @@ module riscv_decoder(
 
         `SYSTEM: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 0;
@@ -472,7 +479,7 @@ module riscv_decoder(
 
         `MISC_MEM: begin
            jal_o <= 0;
-           jarl_o <= 0;
+           jalr_o <= 0;
            branch_o <= 0;
            wb_src_sel_o <= 0;
            gpr_we_a_o <= 0;
@@ -498,6 +505,9 @@ module riscv_decoder(
            ex_op_b_sel_o <= 0;
            alu_op_o <= 0;
            illegal_instr_o <= 1;
+        end // case: default
+
       endcase // case (op_code)
 
    end
+endmodule // riscv_decoder
