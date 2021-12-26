@@ -24,7 +24,7 @@ module testbench;
 
    assign got_a_key = dev.valid;
 
-   task sendkey; // credits to Elisey Izumtsev
+   task sendkey;
       input [7:0] kc; // short for "keycode"
       begin
          even = ~(kc[0] ^ kc[1] ^ kc[2] ^ kc[3] ^ kc[4] ^ kc[5] ^ kc[6] ^ kc[7]);
