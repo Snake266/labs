@@ -1,29 +1,24 @@
-`timescale 1ns / 1ps
-`include "defines.v"
+`timescale 100ns/1ps
 
 module testbench;
-   reg areset = 1;
-   reg clk = 0;
-   reg  ps2_clk = 1;
-   reg  ps2_dat;
-   reg  even;
-   wire [6:0] disp0, disp1;
+   reg rst, clk_50, ps2_clk, ps2_dat;
+   wire [15:0] square_wave;
 
-   always begin
-      #1 clk = ~clk;
-   end
-
-   wire got_a_key;
-
-   device dev(.areset(areset),
-              .clk_50(clk),
+   device lab(
+              .rst(rst),
+              .clk_50(clk_50),
               .ps2_clk(ps2_clk),
               .ps2_dat(ps2_dat),
-              .hex0(disp0),
-              .hex1(disp1));
+              .square_wave(square_wave)
+              );
 
-   assign got_a_key = dev.valid;
+   always #1 clk_50 = ~clk_50;
 
+   always begin
+      ps2_clk = ~ps2_clk;
+   end
+
+   reg         even;
    task sendkey;
       input [7:0] kc; // short for "keycode"
       begin
@@ -87,24 +82,4 @@ module testbench;
          ps2_clk = 1;
       end
    endtask // sendkey
-
-   initial begin
-      #10 areset = 0;
-      sendkey(8'h3a); // M -- just for testing, wrong key
-      sendkey(8'h1c); // A -- testing
-      sendkey(`KEYCODE_X); // key from task
-      sendkey(`KEYCODE_W); // key from task
-      sendkey(`KEYCODE_D); // key from task
-      sendkey(`KEYCODE_C); // key from task
-
-      #1000;
-
-      $finish;
-   end // initial begin
-
-   initial begin
-      $dumpfile("out.vcd");
-      $dumpvars;
-   end
-
 endmodule // testbench
